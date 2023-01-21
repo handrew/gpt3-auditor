@@ -19,7 +19,11 @@ class Repository:
                 file_path = os.path.join(root, file)
                 # Read file path into memory.
                 with open(file_path, "r") as f:
-                    file_content = f.read()
+                    try:
+                        file_content = f.read()
+                    except UnicodeDecodeError:
+                        file_content = "Error: Could not read file " + file_path
+
                 yield file_path, file_content
 
     
