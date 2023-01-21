@@ -8,9 +8,10 @@ SCALE_ENDPOINTS = {
 
 
 class Auditor:
-    def __init__(self, repo_object):
-        self.repo = repo_object
-        self.repo.clone()
+    def __init__(self, repo_object=None):
+        if repo_object is not None:
+            self.repo = repo_object
+            self.repo.clone()
 
     def _get_spellbook(self, endpoint, authorization, input_str):
         headers = {
@@ -36,7 +37,7 @@ class Auditor:
     def create_audit_report(self, analyses_dict):
         """Create a report of the audit given a dict of analyses."""
         # Create Markdown string and add to it.
-        audit_report = ""
+        audit_report = "# Audit Report\n"
         for file_name, analysis in analyses_dict.items():
             audit_report += "## {}\n".format(file_name)
             audit_report += analysis
