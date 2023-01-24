@@ -16,7 +16,7 @@ class Auditor:
     def _get_spellbook(self, endpoint, authorization, input_str):
         headers = {
             "Content-Type": "application/json",
-            "Authorization": "Basic {}".format(authorization)
+            "Authorization": "Basic {}".format(authorization),
         }
         data = {"input": input_str}
 
@@ -27,7 +27,7 @@ class Auditor:
         """Hit the Spellbook endpoint to get the functions from the code."""
         endpoint = SCALE_ENDPOINTS["extract_functions"]
         return self._get_spellbook(endpoint, "cld6dojw3003vsq1a60tk2uqx", code_string)
-    
+
     def analyze_code(self, code_string):
         """Hit Spellbook endpoint to get the auditor's analysis."""
         endpoint = SCALE_ENDPOINTS["analyze"]
@@ -52,7 +52,9 @@ class Auditor:
             try:
                 analysis = self.analyze_code(content_string).strip()
             except requests.exceptions.JSONDecodeError:
-                analysis = "Error: Could not analyze this file. Was probably too long lol."
+                analysis = (
+                    "Error: Could not analyze this file. Was probably too long lol."
+                )
             if "SAFE!" in analysis:
                 analysis = "SAFE!"
             analyses[file_path] = analysis

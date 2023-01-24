@@ -17,6 +17,7 @@ def audit(github_repo_link):
     auditor = Auditor(repo)
     auditor.audit()
 
+
 @cli.command()
 @click.argument("single_file")
 def audit_file(single_file):
@@ -32,6 +33,7 @@ def audit_file(single_file):
     with open("audit_report.md", "w") as f:
         f.write(audit_report)
     print(audit_report)
+
 
 if __name__ == "__main__":
     cli()

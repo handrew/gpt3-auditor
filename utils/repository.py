@@ -1,5 +1,6 @@
 import os
 
+
 class Repository:
     def __init__(self, repo_link):
         self.repo_link = repo_link
@@ -7,10 +8,10 @@ class Repository:
 
     def clone(self):
         """Clone the repo and prepare it for analysis."""
-        os.system(f'git clone {self.repo_link}')
+        os.system(f"git clone {self.repo_link}")
         # Remove the `.git` folder and .gitignore.
-        os.system(f'rm -rf {self.repo_path}/.git')
-        os.system(f'rm -rf {self.repo_path}/.gitignore')
+        os.system(f"rm -rf {self.repo_path}/.git")
+        os.system(f"rm -rf {self.repo_path}/.gitignore")
 
     def files(self):
         """Generator function which yields the files in the repo."""
@@ -25,5 +26,3 @@ class Repository:
                         file_content = "Error: Could not read file " + file_path
 
                 yield file_path, file_content
-
-    
